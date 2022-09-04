@@ -25,4 +25,27 @@ const asyncFn = async () => {
 };
 
 asyncFn();
- 
+
+// so next I gonna show how to migrate from promise to async/awawit
+// we can use Import to use already created promise, but due to gitHub repos I'll don't do that here. But ofcourse in will be more usable
+const getData = async (url) => {
+  const res = await fetch(url);
+  const json = await res.json();
+  return json;
+};
+
+getData("https://jsonplaceholder.typicode.com/todos/1")
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error.message));
+
+// lets create new variables for error testing
+const url = "https://jsonplaceholder.typicode.com/todos/";
+const data = await getData(url);
+console.log(data);
+// to prevent Uncaught error just need to use tru catch block
+try {
+  const dataVerified = await getData(url);
+  console.log(dataVerified);
+} catch (error) {
+  console.log(error.message);
+}
